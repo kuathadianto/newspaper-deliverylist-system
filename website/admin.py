@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+admin.site.register(Bild)
+admin.site.register(Strasse)
+admin.site.register(Zustellung)
+admin.site.register(Zusatztext)
+admin.site.register(Zusatzinformation)
