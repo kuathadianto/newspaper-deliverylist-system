@@ -45,7 +45,7 @@ class Zusatzinformation(models.Model):
     beschreibung = models.CharField(max_length=500, blank=True, null=True)
     information = models.ForeignKey(Zusatztext, on_delete=models.CASCADE)
     bild = models.ForeignKey(Bild, blank=True, null=True, on_delete=models.CASCADE)
-    zustellung = models.ForeignKey(Zustellung, on_delete=models.CASCADE)
+    zustellung = models.ManyToManyField(Zustellung)
 
     def __str__(self):
         return self.beschreibung + ': ' + self.information.text
