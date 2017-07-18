@@ -3,7 +3,7 @@ from django.db import models
 # Bild: speichert die Bilder für die Zusatzinformationen
 class Bild(models.Model):
     titel = models.CharField(max_length=100, unique=True)
-    datei = models.ImageField() # braucht Pillow
+    datei = models.FileField()
 
     def __str__(self):
         return self.titel
