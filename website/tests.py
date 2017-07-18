@@ -30,5 +30,14 @@ class Eindeutigkeitstest(TestCase):
         # Bei Zusatzinformation darf die Beschreibung und das Bild leer sein
         Zusatzinformation.objects.create(information=zus_t, zustellung=zt)
 
+        # Bei Optionnamen darf nicht gleich sein
+        Option.objects.create(name="Test", wert="12345")
+        try:
+            with transaction.atomic():
+                Option.objects.create(name="Test", wert="12345")
+            self.fail("Es gibt Optionen mit gleichen Namen!")
+        except IntegrityError:
+            pass
+
     def test(self):
         self.assertTrue(True)

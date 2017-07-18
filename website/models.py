@@ -40,7 +40,7 @@ class Zusatzinformation(models.Model):
     # nur Beschreibung, wird nicht in der Webseite gezeigt
     beschreibung = models.CharField(max_length=500, blank=True, null=True)
     information = models.ForeignKey(Zusatztext, on_delete=models.CASCADE)
-    bild = models.ForeignKey(Bild, blank=True, null=True, on_delete=models.CASCADE)
+    bild = models.ForeignKey(Bild, blank=True, null=True)
 
     def __str__(self):
         return self.beschreibung + ': ' + self.information.text
@@ -62,3 +62,16 @@ class Zustellung(models.Model):
     class Meta:
         unique_together = ('hausnummer', 'strasse')
         ordering = ('strasse', 'hausnummer')
+
+
+# Option: zusätzliche Informationen wie Zustellername, usw. Hat keine Beziehung
+#         mit der Zustellungen
+class Option(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    wert = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ('name',)

@@ -22,7 +22,7 @@
                     {% if zustellung.zusatzinformationen.all|length > 0 %}
                         <ul>
                             {% for info in zustellung.zusatzinformationen.all %}
-                                <li>{{ info.information }}<img src="{{ info.bild.datei.url }}"></li>
+                                <li>{{ info.information }} {% if info.bild %}<a href="{{ info.bild.datei.url }}" target="_blank">hier klicken</a>{% endif %}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
