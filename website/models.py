@@ -3,10 +3,13 @@ from django.db import models
 # Bild: speichert die Bilder für die Zusatzinformationen
 class Bild(models.Model):
     titel = models.CharField(max_length=100, unique=True)
-    datei = models.CharField(max_length=200) # Should be changed to image type
+    datei = models.ImageField() # braucht Pillow
 
     def __str__(self):
         return self.titel
+
+    class Meta:
+        ordering = ('titel',)
 
 
 # Straße: speichert die Straßenname
@@ -16,6 +19,9 @@ class Strasse(models.Model):
     def __str__(self):
         return self.strassenname
 
+    class Meta:
+        ordering = ('strassenname',)
+
 
 # Zusatztext: da bei Zusatzinformationen gleichen Text benutzt,
 #             existiert dieses Model.
@@ -24,6 +30,9 @@ class Zusatztext(models.Model):
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        ordering = ('text',)
 
 
 # Zusatzinformation: speichert die Zusatzinformationen für jede Zustellung
@@ -35,6 +44,9 @@ class Zusatzinformation(models.Model):
 
     def __str__(self):
         return self.beschreibung + ': ' + self.information.text
+
+    class Meta:
+        ordering = ('beschreibung', 'information')
 
 
 # Zustellung: speichert die Information, wie viele Zeitungen pro Haus zu liefern
@@ -49,3 +61,4 @@ class Zustellung(models.Model):
 
     class Meta:
         unique_together = ('hausnummer', 'strasse')
+        ordering = ('strasse', 'hausnummer')

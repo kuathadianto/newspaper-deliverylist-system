@@ -1,9 +1,37 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>SS Zustellliste</title>
+        <title>Super Sonntag Zustellliste</title>
     </head>
     <body>
-        <h1>{{ message }}</h1>
+        <h1>Super Sonntag</h1>
+        <h2>Bezirk: 12345</h2>
+        <h3>Zusteller: Kuat Hadianto</h3>
+        <h3>Summe der Zeitungen: {{ summe_zeitungen }}</h3>
+        <table>
+            <tr>
+                <th>Adresse</th>
+                <th>Summe</th>
+                <th>Zusatzinformationen</th>
+            </tr>
+            {% for zustellung in zustellungen %}
+            <tr>
+                <td>{{ zustellung }}</td>
+                <td>{{ zustellung.summe_zeitungen }}</td>
+                <td>
+                    {% if zustellung.zusatzinformationen.all|length > 0 %}
+                        <ul>
+                            {% for info in zustellung.zusatzinformationen.all %}
+                                <li>{{ info.information }}<img src="{{ info.bild.datei.url }}"></li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <footer>
+            <p>Aktualisiert am 18.7.2017<br>&copy; 2017 - Kuat Hadianto</p>
+        </footer>
     </body>
 </html>
