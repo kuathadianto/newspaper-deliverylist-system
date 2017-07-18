@@ -42,7 +42,7 @@ class Zustellung(models.Model):
     hausnummer = models.IntegerField()
     summe_zeitungen = models.IntegerField()
     strasse = models.ForeignKey(Strasse, on_delete=models.CASCADE)
-    zusatzinformationen = models.ManyToManyField(Zusatzinformation)
+    zusatzinformationen = models.ManyToManyField(Zusatzinformation, blank=True)
 
     def __str__(self):
         return self.strasse.strassenname + ' ' + str(self.hausnummer)
