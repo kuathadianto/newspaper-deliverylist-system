@@ -24,7 +24,7 @@ class Zustellung(models.Model):
     strasse = models.ForeignKey(Strasse, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.strasse + ' ' + self.hausnummer
+        return self.strasse.strassenname + ' ' + str(self.hausnummer)
 
     class Meta:
         unique_together = ('hausnummer', 'strasse')
@@ -48,4 +48,4 @@ class Zusatzinformation(models.Model):
     zustellung = models.ForeignKey(Zustellung, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.beschreibung + ': ' + self.information
+        return self.beschreibung + ': ' + self.information.text
