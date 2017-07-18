@@ -17,19 +17,6 @@ class Strasse(models.Model):
         return self.strassenname
 
 
-# Zustellung: speichert die Information, wie viele Zeitungen pro Haus zu liefern
-class Zustellung(models.Model):
-    hausnummer = models.IntegerField()
-    summe_zeitungen = models.IntegerField()
-    strasse = models.ForeignKey(Strasse, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.strasse.strassenname + ' ' + str(self.hausnummer)
-
-    class Meta:
-        unique_together = ('hausnummer', 'strasse')
-
-
 # Zusatztext: da bei Zusatzinformationen gleichen Text benutzt,
 #             existiert dieses Model.
 class Zusatztext(models.Model):
@@ -45,7 +32,20 @@ class Zusatzinformation(models.Model):
     beschreibung = models.CharField(max_length=500, blank=True, null=True)
     information = models.ForeignKey(Zusatztext, on_delete=models.CASCADE)
     bild = models.ForeignKey(Bild, blank=True, null=True, on_delete=models.CASCADE)
-    zustellung = models.ManyToManyField(Zustellung)
 
     def __str__(self):
         return self.beschreibung + ': ' + self.information.text
+
+
+# Zustellung: speichert die Information, wie viele Zeitungen pro Haus zu liefern
+class Zustellung(models.Model):
+    hausnummer = models.IntegerField()
+    summe_zeitungen = models.IntegerField()
+    strasse = models.ForeignKey(Strasse, on_delete=models.CASCADE)
+    zusatzinformation = models.ManyToManyField(Zusatzinformation)
+
+    def __str__(self):
+        return self.strasse.strassenname + ' ' + str(self.hausnummer)
+
+    class Meta:
+        unique_together = ('hausnummer', 'strasse')
