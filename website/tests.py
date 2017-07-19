@@ -5,12 +5,12 @@ from .models import *
 
 class Eindeutigkeitstest(TestCase):
     def setUp(self):
-        # Eindeutigkeit von Straßen
+        # Eindeutigkeit von Strassen
         str_j = Strasse.objects.create(strassenname="Junkerstr.")
         try:
             with transaction.atomic():
                 Strasse.objects.create(strassenname="Junkerstr.")
-            self.fail("Es gibt Straßen mit gleichen Namen!")
+            self.fail("Es gibt Strassen mit gleichen Namen!")
         except IntegrityError:
             pass
         str_m = Strasse.objects.create(strassenname="Maastrichter Str.")

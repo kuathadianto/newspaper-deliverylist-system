@@ -1,6 +1,6 @@
 from django.db import models
 
-# Bild: speichert die Bilder für die Zusatzinformationen
+# Bild: speichert die Bilder fuer die Zusatzinformationen
 class Bild(models.Model):
     titel = models.CharField(max_length=100, unique=True)
     datei = models.FileField()
@@ -12,7 +12,7 @@ class Bild(models.Model):
         ordering = ('titel',)
 
 
-# Straße: speichert die Straßenname
+# Strasse: speichert die Strassenname
 class Strasse(models.Model):
     strassenname = models.CharField(max_length=100, unique=True)
 
@@ -35,7 +35,7 @@ class Zusatztext(models.Model):
         ordering = ('text',)
 
 
-# Zusatzinformation: speichert die Zusatzinformationen für jede Zustellung
+# Zusatzinformation: speichert die Zusatzinformationen fuer jede Zustellung
 class Zusatzinformation(models.Model):
     # nur Beschreibung, wird nicht in der Webseite gezeigt
     beschreibung = models.CharField(max_length=500, blank=True, null=True)
@@ -64,7 +64,7 @@ class Zustellung(models.Model):
         ordering = ('strasse', 'hausnummer')
 
 
-# Option: zusätzliche Informationen wie Zustellername, usw. Hat keine Beziehung
+# Option: zusaetzliche Informationen wie Zustellername, usw. Hat keine Beziehung
 #         mit der Zustellungen
 class Option(models.Model):
     name = models.CharField(max_length=200, unique=True)
