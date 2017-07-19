@@ -52,16 +52,18 @@ class Zusatzinformation(models.Model):
 # Zustellung: speichert die Information, wie viele Zeitungen pro Haus zu liefern
 class Zustellung(models.Model):
     hausnummer = models.IntegerField()
+    hausnummer_zusatz = models.CharField(max_length=5, blank=True, null=True, default='')
     summe_zeitungen = models.IntegerField()
     strasse = models.ForeignKey(Strasse, on_delete=models.CASCADE)
     zusatzinformationen = models.ManyToManyField(Zusatzinformation, blank=True)
 
     def __str__(self):
-        return self.strasse.strassenname + ' ' + str(self.hausnummer)
+        return self.strasse.strassenname + ' ' + str(self.hausnummer) + self.ha$
 
     class Meta:
-        unique_together = ('hausnummer', 'strasse')
-        ordering = ('strasse', 'hausnummer')
+        unique_together = ('hausnummer', 'strasse', 'hausnummer_zusatz')
+        ordering = ('strasse', 'hausnummer', 'hausnummer_zusatz')
+
 
 
 # Option: zusaetzliche Informationen wie Zustellername, usw. Hat keine Beziehung
