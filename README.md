@@ -10,6 +10,3 @@ I made this project for managing my newspaper delivery list. The list can be edi
 - Django 1.11.3
 - Web Server of your choice (I'm using Apache)
 - Database of your choice (I'm using SQLite)
-
-## Known Issues:
-- zustellung.hausnummer_zusatz cannot be empty although it is set blank=True & null=True
