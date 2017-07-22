@@ -58,7 +58,10 @@ class Zustellung(models.Model):
     zusatzinformationen = models.ManyToManyField(Zusatzinformation, blank=True)
 
     def __str__(self):
-        return self.strasse.strassenname + ' ' + str(self.hausnummer) + self.hausnummer_zusatz
+        hz = ''
+        if self.hausnummer_zusatz is not None:
+            hz = self.hausnummer_zusatz
+        return self.strasse.strassenname + ' ' + str(self.hausnummer) + hz
 
     class Meta:
         unique_together = ('hausnummer', 'strasse', 'hausnummer_zusatz')
